@@ -1,0 +1,347 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("sev.theme");if(t==="dark")document.documentElement.dataset.theme="dark";}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后台 — Severus的神秘聚落</title>
+<link rel="stylesheet" href="/static/css/app.css?v=3">
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="mark"><a href="/" style="color:#fff;display:flex;align-items:center;gap:7px"><span>☾</span><b>Severus</b></a></div>
+  <div class="links"><a href="/">回到聚落</a></div>
+  <div class="right" id="nav-right"></div>
+</nav>
+
+<div class="admin-shell">
+
+  <aside class="admin-side">
+    <div class="brand">后台</div>
+    <nav id="admin-nav">
+      <button type="button" data-tab="overview" class="on">概览</button>
+      <button type="button" data-tab="photo">图片</button>
+      <button type="button" data-tab="video">视频</button>
+      <button type="button" data-tab="track">音乐</button>
+      <button type="button" data-tab="forum">论坛</button>
+      <button type="button" data-tab="users">用户</button>
+      <button type="button" data-tab="applications">申请</button>
+      <button type="button" data-tab="reports">举报</button>
+      <button type="button" data-tab="notify">发送通知</button>
+      <button type="button" data-tab="activity">活动</button>
+      <button type="button" data-tab="trash">回收站</button>
+      <button type="button" data-tab="settings">设置</button>
+    </nav>
+    <div class="side-user" id="side-user"></div>
+    <a class="back" href="/">← 回到聚落</a>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-head">
+      <h1 id="page-title">概览</h1>
+      <p id="page-sub">正在读取…</p>
+    </div>
+
+    <!-- 概览 -->
+    <section data-panel="overview">
+      <div class="ov-grid">
+        <div class="ov-top">
+          <div class="stats-grid" id="stats-grid"></div>
+        </div>
+
+        <div class="ov-main">
+          <div class="panel">
+            <h2>最近活动</h2>
+            <p class="hint">包含管理员在内的全部登录与发帖记录。</p>
+            <div id="recent-box"></div>
+          </div>
+        </div>
+
+        <aside class="ov-side">
+          <div class="panel">
+            <h2>快捷操作</h2>
+            <div class="quick" id="quick-box"></div>
+          </div>
+
+          <div class="panel">
+            <h2>存储占用</h2>
+            <div id="storage-box"></div>
+          </div>
+
+          <div class="panel">
+            <h2>近 7 日</h2>
+            <div id="trend-box"></div>
+          </div>
+
+          <div class="panel">
+            <h2>系统</h2>
+            <div class="sys" id="sys-box"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 图片 -->
+    <section data-panel="photo" hidden>
+      <div class="media-layout">
+        <div class="panel media-side">
+          <h2>上传照片</h2>
+          <p class="hint" id="photo-limit">支持 JPG / PNG / GIF / WebP</p>
+          <div class="inline-row">
+            <select id="photo-target" aria-label="上传到哪个文件夹"></select>
+            <button class="btn sm ghost" type="button" id="photo-new">新建</button>
+          </div>
+          <div class="field">
+            <label for="photo-title">标题（可选，留空则用文件名）</label>
+            <input id="photo-title" type="text" maxlength="120" placeholder="给这批照片起个名字">
+          </div>
+          <div class="drop" id="photo-drop">
+            <strong>点击选择照片，或拖到这里</strong>
+            <span>会传进上面选中的文件夹</span>
+            <input type="file" id="photo-input" accept="image/*" multiple>
+          </div>
+          <div class="queue" id="photo-queue"></div>
+        </div>
+
+        <div class="panel media-main">
+          <h2>相册 <span class="count" id="photo-total"></span></h2>
+          <div class="fbar" id="photo-fbar"></div>
+          <div class="bulk" id="photo-bulk" hidden></div>
+          <div class="uploaded" id="photo-list"></div>
+          <p class="panel-foot" id="photo-foot"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 视频 -->
+    <section data-panel="video" hidden>
+      <div class="media-layout">
+        <div class="panel media-side">
+          <h2>上传视频</h2>
+          <p class="hint" id="video-limit">支持 MP4 / WebM</p>
+          <div class="inline-row">
+            <select id="video-target" aria-label="上传到哪个文件夹"></select>
+            <button class="btn sm ghost" type="button" id="video-new">新建</button>
+          </div>
+          <div class="field">
+            <label for="video-title">标题（可选，留空则用文件名）</label>
+            <input id="video-title" type="text" maxlength="120" placeholder="给这段影像起个名字">
+          </div>
+          <div class="drop" id="video-drop">
+            <strong>点击选择视频，或拖到这里</strong>
+            <span>大文件会边传边写盘，请不要关闭页面</span>
+            <input type="file" id="video-input" accept="video/*" multiple>
+          </div>
+          <div class="queue" id="video-queue"></div>
+        </div>
+
+        <div class="panel media-main">
+          <h2>影像 <span class="count" id="video-total"></span></h2>
+          <div class="fbar" id="video-fbar"></div>
+          <div class="bulk" id="video-bulk" hidden></div>
+          <div class="uploaded" id="video-list"></div>
+          <p class="panel-foot" id="video-foot"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 音乐 -->
+    <section data-panel="track" hidden>
+      <div class="media-layout">
+        <div class="panel media-side">
+          <h2>上传音乐</h2>
+          <p class="hint" id="track-limit">支持 MP3 / M4A / WAV / OGG / FLAC</p>
+          <div class="inline-row">
+            <select id="track-target" aria-label="上传到哪个歌单"></select>
+            <button class="btn sm ghost" type="button" id="track-new">新建</button>
+          </div>
+          <div class="field">
+            <label for="track-title">标题（可选，留空则用文件名）</label>
+            <input id="track-title" type="text" maxlength="120" placeholder="给这首曲子起个名字">
+          </div>
+          <div class="drop" id="track-drop">
+            <strong>点击选择音频，或拖到这里</strong>
+            <span>会传进上面选中的歌单</span>
+            <input type="file" id="track-input" accept="audio/*" multiple>
+          </div>
+          <div class="queue" id="track-queue"></div>
+        </div>
+
+        <div class="panel media-main">
+          <h2>曲库 <span class="count" id="track-total"></span></h2>
+          <div class="fbar" id="track-fbar"></div>
+          <div class="bulk" id="track-bulk" hidden></div>
+          <div class="uploaded" id="track-list"></div>
+          <p class="panel-foot" id="track-foot"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 论坛 -->
+    <section data-panel="forum" hidden>
+      <div class="panel">
+        <h2>论坛管理</h2>
+        <p class="hint">删除的帖子不再显示，数据库里保留标记。</p>
+        <div class="filters">
+          <input type="search" id="forum-q" placeholder="搜索内容…">
+          <input type="search" id="forum-user" placeholder="按作者筛选">
+          <select id="forum-since">
+            <option value="0">全部时间</option>
+            <option value="1">今天</option>
+            <option value="7">最近 7 天</option>
+            <option value="30">最近 30 天</option>
+          </select>
+          <button class="btn sm ghost" type="button" id="forum-reset">重置</button>
+        </div>
+        <div id="forum-list"></div>
+      </div>
+    </section>
+
+    <!-- 用户 -->
+    <section data-panel="users" hidden>
+      <div class="panel">
+        <h2>注册用户</h2>
+        <p class="hint">被封禁的账号无法登录和发帖，已有帖子仍然保留。</p>
+        <div class="filters">
+          <input type="search" id="user-q" placeholder="搜索用户名…">
+          <button class="btn sm ghost" type="button" id="user-reset">重置</button>
+        </div>
+        <div id="user-table"></div>
+      </div>
+      <div class="panel">
+        <h2>修改我的密码</h2>
+        <p class="hint">改完立即生效，当前会话仍然有效。</p>
+        <div class="field">
+          <label for="old-pw">原密码</label>
+          <input id="old-pw" type="password" autocomplete="current-password">
+        </div>
+        <div class="field">
+          <label for="new-pw">新密码</label>
+          <input id="new-pw" type="password" autocomplete="new-password" placeholder="至少 6 位">
+        </div>
+        <button class="btn solid sm" id="pw-save" type="button">保存新密码</button>
+      </div>
+    </section>
+
+    <!-- 活动 -->
+    <section data-panel="activity" hidden>
+      <div class="panel">
+        <h2>活动记录</h2>
+        <p class="hint">操作日志记「谁改了什么」，访问与发帖记「谁来过、说了什么」。</p>
+
+        <div class="sortbar" id="act-tabs" style="justify-content:center">
+          <button type="button" data-act="audit" class="on">操作日志</button>
+          <button type="button" data-act="visit">访问与发帖</button>
+        </div>
+
+        <div class="act-view" id="act-view">
+          <div class="act-page" id="audit-box"></div>
+          <div class="act-page" id="activity-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 申请 -->
+    <section data-panel="applications" hidden>
+      <div class="panel">
+        <h2>等待审批</h2>
+        <p class="hint">申请制注册时，新人先在这里排队。通过后可以直接登录。</p>
+        <div id="apps-box"></div>
+      </div>
+    </section>
+
+    <!-- 举报 -->
+    <section data-panel="reports" hidden>
+      <div class="panel">
+        <h2>待处理举报</h2>
+        <p class="hint">处理完点「已处理」；要删内容请去对应的媒体或论坛面板。</p>
+        <div id="reports-box"></div>
+      </div>
+    </section>
+
+    <!-- 回收站 -->
+    <section data-panel="trash" hidden>
+      <div class="panel">
+        <h2>回收站</h2>
+        <p class="hint">删掉的东西先放这里，30 天后自动清掉。这段时间内还能恢复。</p>
+        <div id="trash-box"></div>
+      </div>
+    </section>
+
+    <!-- 设置 -->
+    <section data-panel="settings" hidden>
+      <div class="panel">
+        <h2>注册</h2>
+        <p class="hint">关掉之后只有管理员能建账号。</p>
+        <label class="chk">
+          <input type="checkbox" id="set-register">
+          <span>允许新用户自己注册</span>
+        </label>
+        <label class="chk" style="margin-top:10px">
+          <input type="checkbox" id="set-apply">
+          <span>改成申请制（填申请，你审批）</span>
+        </label>
+        <div class="field" style="margin-top:12px">
+          <label for="set-invite">邀请码</label>
+          <input id="set-invite" placeholder="留空表示不需要邀请码">
+        </div>
+        <div class="field">
+          <label for="set-quota">每人存储上限（GB，0 不限）</label>
+          <input id="set-quota" type="number" min="0" step="1" placeholder="5">
+        </div>
+        <div class="field">
+          <label for="set-daily">每人每天最多上传（个，0 不限）</label>
+          <input id="set-daily" type="number" min="0" step="1" placeholder="20">
+        </div>
+        <button class="btn solid sm" id="set-save" type="button">保存设置</button>
+      </div>
+
+      <div class="panel">
+        <h2>备份</h2>
+        <p class="hint">把数据库和全部媒体文件打成一个 zip。文件多时会慢，建议定期做。</p>
+        <a class="btn ghost sm" href="/api/admin/backup">下载整站备份</a>
+      </div>
+    </section>
+
+
+    <!-- 发送通知 -->
+    <section data-panel="notify" hidden>
+      <div class="panel">
+        <h2>发送通知</h2>
+        <p class="hint">发给全部用户或指定一个人。对方进站时会看到弹窗，点「知道了」才算读过。</p>
+
+        <div class="field">
+          <label for="nt-scope">发给</label>
+          <select id="nt-scope" style="font-family:var(--font);font-size:15px;padding:9px 12px;border:1px solid var(--hairline);border-radius:11px;background:var(--canvas);color:var(--ink)">
+            <option value="all">全部用户</option>
+            <option value="one">指定一个人</option>
+            <option value="many">指定多个人</option>
+          </select>
+        </div>
+
+        <div class="field" id="nt-user-wrap" hidden>
+          <label>选人（可多选）</label>
+          <input id="nt-search" placeholder="按用户名搜索…" style="margin-bottom:8px">
+          <div id="nt-users" class="nt-users"></div>
+        </div>
+
+        <div class="field">
+          <label for="nt-text">内容（可换行）</label>
+          <textarea id="nt-text" rows="5" maxlength="200"
+                    placeholder="比如：本周六维护，晚上十点后会短暂离线"
+                    style="font-family:var(--font);font-size:15px;line-height:1.47;color:var(--ink);background:var(--canvas);border:1px solid var(--hairline);border-radius:11px;padding:11px 14px;resize:vertical;outline:none;letter-spacing:-.2px"></textarea>
+          <p class="hint" style="margin-top:6px"><span id="nt-count">0</span> / 200 字</p>
+        </div>
+
+        <button class="btn solid sm" id="nt-send" type="button">发送通知</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="toast"></div>
+<script src="/static/js/admin.js?v=3"></script>
+</body>
+</html>

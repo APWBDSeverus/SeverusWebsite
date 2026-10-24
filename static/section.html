@@ -1,0 +1,47 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<script>try{var t=localStorage.getItem("sev.theme");if(t==="dark")document.documentElement.dataset.theme="dark";}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Severus的神秘聚落</title>
+<link rel="stylesheet" href="/static/css/app.css?v=3">
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="mark"><a href="/" style="color:#fff;display:flex;align-items:center;gap:7px"><span>☾</span><b>Severus</b></a></div>
+  <div class="links"><a href="/">首页</a></div>
+  <div class="right" id="nav-right"></div>
+  <button class="burger" id="burger" aria-label="展开菜单">☰</button>
+</nav>
+
+<main class="section-wrap">
+  <header class="sec-head">
+    <span id="sec-icon"></span>
+    <h1 id="sec-title">加载中…</h1>
+    <p class="sec-sub" id="sec-sub"></p>
+  </header>
+  <div class="sec-rule"></div>
+  <div id="sec-tools"></div>
+  <div id="sec-body"></div>
+</main>
+
+<div id="toast"></div>
+
+<!-- 视频播放：深色遮罩，画面居中 -->
+<div class="overlay" id="pl" hidden>
+  <div class="bar">
+    <span class="title" id="pl-title"></span>
+    <button class="chip" id="pl-close" aria-label="关闭">✕</button>
+  </div>
+  <div class="stage">
+    <video id="pl-video" controls playsinline></video>
+  </div>
+  <div class="caption" id="pl-cap"></div>
+</div>
+
+<script src="/static/js/player.js?v=3"></script>
+<script src="/static/js/section.js?v=3"></script>
+</body>
+</html>

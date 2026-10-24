@@ -1,0 +1,27 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 运行时数据（不进仓库）
+data/
+demo-data/
+*.db
+*.db-wal
+*.db-shm
+
+# 临时目录
+.tmp/
+.q*/
+.t1/
+.u*/
+.v*/
+.w*/
+.x*/
+
+# 下载的工具
+cloudflared.exe
+
+# 系统
+Thumbs.db
+desktop.ini

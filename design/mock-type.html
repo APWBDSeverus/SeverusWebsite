@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>标题渐变 · 四种方案</title>
+<style>
+:root{
+  --ink:#1d1d1f; --ink-48:#7a7a7a;
+  --canvas:#ffffff; --parchment:#f5f5f7; --hairline:#e0e0e0;
+  --font:-apple-system,"SF Pro Display","SF Pro Text",system-ui,
+         "Segoe UI Variable Display","Segoe UI","Microsoft YaHei",
+         "PingFang SC",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--font); background:var(--parchment); color:var(--ink);
+  padding:48px; font-size:17px; line-height:1.47; letter-spacing:-.374px;
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1440px;margin:0 auto}
+.panel{
+  background:var(--canvas); border:1px solid var(--hairline);
+  border-radius:18px; padding:32px 28px; min-height:280px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.tag{
+  font-size:12px; line-height:1; letter-spacing:-.12px;
+  color:var(--ink-48); text-transform:uppercase;
+  margin-bottom:18px; display:flex; align-items:center; gap:8px;
+}
+.tag b{font-weight:600;color:var(--ink)}
+h1{
+  font-size:44px; font-weight:600; line-height:1.1; letter-spacing:-.5px;
+  margin-bottom:14px;
+}
+.sub{font-size:20px; font-weight:400; letter-spacing:.1px; color:var(--ink-48)}
+.note{font-size:13px;line-height:1.5;letter-spacing:-.1px;color:var(--ink-48);margin-top:16px}
+
+/* ---------- A 冷静渐变 ---------- */
+.grad-a{
+  background-image:linear-gradient(100deg,#0a84ff 0%,#5e5ce6 38%,#bf5af2 72%,#0a84ff 100%);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+/* ---------- B 暖调渐变 ---------- */
+.grad-b{
+  background-image:linear-gradient(100deg,#ff9f0a 0%,#ff375f 45%,#bf5af2 100%);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+/* ---------- C 柔光渐变（Apple Intelligence 风） ---------- */
+.grad-c{
+  background-image:linear-gradient(95deg,#3b82f6 0%,#8b5cf6 26%,#ec4899 52%,#f97316 76%,#eab308 100%);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+/* ---------- D 只给拉丁词上色 ---------- */
+.grad-d{
+  background-image:linear-gradient(100deg,#0a84ff 0%,#5e5ce6 55%,#bf5af2 100%);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+.solid{color:var(--ink)}
+
+/* ---------- E 逐字彩色 ---------- */
+.w span:nth-child(1){color:#0071e3}
+.w span:nth-child(2){color:#30b0c7}
+.w span:nth-child(3){color:#34c759}
+.w span:nth-child(4){color:#ffcc00}
+.w span:nth-child(5){color:#ff9500}
+.w span:nth-child(6){color:#ff2d55}
+.w span:nth-child(7){color:#af52de}
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <div class="panel">
+    <div class="tag"><b>A</b> 冷静渐变 · 蓝 → 靛 → 紫</div>
+    <h1 class="grad-a">Severus的神秘聚落</h1>
+    <p class="sub">夜里有照片，也有故事。</p>
+    <p class="note">最安全的一档。冷色不抢内容，和蓝色按钮同一家族。</p>
+  </div>
+
+  <div class="panel">
+    <div class="tag"><b>B</b> 暖调渐变 · 橙 → 玫红 → 紫</div>
+    <h1 class="grad-b">Severus的神秘聚落</h1>
+    <p class="sub">夜里有照片，也有故事。</p>
+    <p class="note">更“黄昏”一点，和“神秘聚落”的气质贴，但会跟蓝色按钮打架。</p>
+  </div>
+
+  <div class="panel">
+    <div class="tag"><b>C</b> 柔光渐变 · Apple Intelligence 风</div>
+    <h1 class="grad-c">Severus的神秘聚落</h1>
+    <p class="sub">夜里有照片，也有故事。</p>
+    <p class="note">五色过渡，最像 Apple 那个彩色 wordmark。中文笔画密，五色会略碎。</p>
+  </div>
+
+  <div class="panel">
+    <div class="tag"><b>D</b> 只给拉丁词上色 · 中文保持实色</div>
+    <h1><span class="grad-d">Severus</span><span class="solid">的神秘聚落</span></h1>
+    <p class="sub">夜里有照片，也有故事。</p>
+    <p class="note">最克制、最像正规品牌手册的做法。中文的可读性完全不受影响。</p>
+  </div>
+
+  <div class="panel">
+    <div class="tag"><b>E</b> 逐字彩色 · 每个字单独一个颜色</div>
+    <h1 class="w">
+      <span>S</span><span>e</span><span>v</span><span>e</span><span>r</span><span>u</span><span>s</span>
+      <span style="color:#af52de">的</span><span style="color:#ff2d55">神</span><span style="color:#ff9500">秘</span><span style="color:#ffcc00">聚</span><span style="color:#34c759">落</span>
+    </h1>
+    <p class="sub">夜里有照片，也有故事。</p>
+    <p class="note">很热闹，但和“单一强调色”的原则正面冲突。只建议用在活动页，不要放首页。</p>
+  </div>
+
+  <div class="panel" style="background:#000;border-color:#000">
+    <div class="tag" style="color:#7a7a7a"><b style="color:#fff">参照</b> 同一组渐变落在暗底上</div>
+    <h1 class="grad-c">Severus的神秘聚落</h1>
+    <p class="sub" style="color:#a1a1a6">夜里有照片，也有故事。</p>
+    <p class="note" style="color:#7a7a7a">暗底会把渐变推亮，柔光渐变在深色上比白底好看很多。</p>
+  </div>
+
+</div>
+</body>
+</html>

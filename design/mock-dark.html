@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Severus的神秘聚落 — 方向预览</title>
+<style>
+/* ============================================================
+   Apple 设计规范 · 暗色变体「夜航的聚落」
+   token 全部取自 awesome-design-md/design-md/apple/DESIGN.md
+   ============================================================ */
+:root{
+  /* 交互色：暗底用 Sky Link Blue，规范指定 */
+  --primary:        #0066cc;
+  --primary-focus:  #0071e3;
+  --primary-on-dark:#2997ff;
+
+  /* 文字 */
+  --on-dark:        #ffffff;
+  --body-muted:     #cccccc;
+  --muted-80:       #a1a1a6;
+  --muted-48:       #7a7a7a;
+
+  /* 表面：三档微差代替边框做分层 */
+  --surface-black:  #000000;
+  --tile-1:         #272729;
+  --tile-2:         #2a2a2c;
+  --tile-3:         #252527;
+
+  /* 细线 */
+  --hairline:       rgba(255,255,255,.08);
+  --hairline-soft:  rgba(255,255,255,.05);
+
+  /* 圆角 */
+  --r-sm: 8px;  --r-md: 11px;  --r-lg: 18px;  --r-pill: 9999px;
+
+  /* 间距 */
+  --s-xxs:4px; --s-xs:8px; --s-sm:12px; --s-md:17px;
+  --s-lg:24px; --s-xl:32px; --s-xxl:48px; --s-sec:80px;
+
+  /* 全集唯一阴影：只给“搁在台面上的作品” */
+  --product-shadow: rgba(0,0,0,.22) 3px 5px 30px 0;
+
+  --font: -apple-system, "SF Pro Display", "SF Pro Text", system-ui,
+          "Segoe UI Variable Display", "Segoe UI", "Microsoft YaHei",
+          "PingFang SC", sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:var(--font);
+  background:var(--tile-1);
+  color:var(--on-dark);
+  font-size:17px; line-height:1.47; letter-spacing:-.374px;
+}
+
+/* ---------------------------------------------------------- 全局导航 */
+.gnav{
+  height:44px;
+  background:var(--surface-black);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 var(--s-lg);
+  font-size:12px; line-height:1; letter-spacing:-.12px; font-weight:400;
+  position:sticky; top:0; z-index:100;
+}
+.gnav .mark{display:flex;align-items:center;gap:7px;color:#fff;letter-spacing:.02em}
+.gnav .mark b{font-weight:600}
+.gnav .links{display:flex;gap:32px;color:var(--body-muted)}
+.gnav .links a{color:var(--body-muted);text-decoration:none;transition:color .2s}
+.gnav .links a:hover{color:#fff}
+.gnav .right{display:flex;align-items:center;gap:18px;color:var(--body-muted)}
+.gnav .right a{color:var(--body-muted);text-decoration:none}
+.gnav .right .pill{
+  background:var(--primary); color:#fff; border-radius:var(--r-pill);
+  padding:6px 14px; font-size:12px; letter-spacing:-.12px;
+}
+
+/* ---------------------------------------------------------- 首屏 */
+.hero{
+  background:var(--tile-3);
+  padding:var(--s-sec) var(--s-xxl) 48px;
+  text-align:center;
+}
+.hero h1{
+  font-size:56px; font-weight:600; line-height:1.07; letter-spacing:-.28px;
+  margin-bottom:var(--s-md);
+}
+.hero .lead{
+  font-size:28px; font-weight:400; line-height:1.14; letter-spacing:.196px;
+  color:var(--body-muted);
+  margin-bottom:var(--s-xl);
+}
+.hero .cta{display:flex;gap:16px;justify-content:center;margin-bottom:var(--s-xl)}
+.btn{
+  display:inline-block; border-radius:var(--r-pill); padding:11px 22px;
+  font-size:17px; line-height:1.47; letter-spacing:-.374px;
+  text-decoration:none; cursor:pointer; border:1px solid transparent;
+  transition:transform .12s ease, background .2s;
+}
+.btn:active{transform:scale(.95)}
+.btn.solid{background:var(--primary);color:#fff}
+.btn.ghost{
+  background:transparent; color:var(--primary-on-dark);
+  border-color:var(--primary-on-dark);
+}
+.hero .stats{
+  font-size:14px; line-height:1.43; letter-spacing:-.224px;
+  color:var(--muted-48);
+}
+
+/* ---------------------------------------------------------- 展厅三栏 */
+.hall{
+  display:grid;
+  grid-template-columns:320px minmax(0,1fr) 280px;
+  gap:var(--s-lg);
+  padding:40px var(--s-xxl) 56px;
+  align-items:start;
+}
+.col-left{display:flex;flex-direction:column;gap:var(--s-lg)}
+
+.card{
+  background:var(--tile-2);
+  border:1px solid var(--hairline);
+  border-radius:var(--r-lg);
+  padding:var(--s-lg);
+}
+.card > h2{
+  font-size:21px; font-weight:600; line-height:1.19; letter-spacing:.231px;
+  display:flex; align-items:baseline; gap:8px;
+  margin-bottom:var(--s-lg);
+}
+.card > h2 .count{
+  font-size:14px; font-weight:400; letter-spacing:-.224px;
+  color:var(--muted-48);
+}
+.card .sub{
+  font-size:14px; line-height:1.43; letter-spacing:-.224px;
+  color:var(--muted-48); margin-top:-12px; margin-bottom:var(--s-md);
+}
+
+/* 相册网格 */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-xs)}
+.ph{
+  aspect-ratio:1/1; border-radius:var(--r-sm);
+  box-shadow:var(--product-shadow);
+  position:relative; overflow:hidden;
+}
+.ph::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), transparent 45%);
+}
+.ph.a{background:radial-gradient(120% 90% at 30% 18%, #44607a 0%, #1e2b39 52%, #0b1016 100%)}
+.ph.b{background:radial-gradient(130% 100% at 72% 26%, #6b5a44 0%, #33291f 55%, #100d0a 100%)}
+.ph.c{background:radial-gradient(110% 110% at 48% 82%, #3b4a5e 0%, #1a222c 58%, #080b0f 100%)}
+.ph.d{background:radial-gradient(125% 95% at 22% 68%, #47566c 0%, #1d2634 55%, #090d13 100%)}
+
+/* 视频列表 */
+.vlist{list-style:none;display:flex;flex-direction:column;gap:var(--s-sm)}
+.vrow{display:flex;gap:var(--s-sm);align-items:center;cursor:pointer}
+.vrow .poster{
+  width:80px;height:45px;flex:none;border-radius:var(--r-sm);
+  box-shadow:var(--product-shadow);position:relative;overflow:hidden;
+}
+.vrow .poster::after{
+  content:"▶"; position:absolute; inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:rgba(255,255,255,.9);
+  background:rgba(0,0,0,.28);
+}
+.vrow .meta{min-width:0}
+.vrow .meta strong{
+  display:block;font-size:15px;font-weight:600;letter-spacing:-.2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.vrow .meta span{
+  font-size:12px;line-height:1;letter-spacing:-.12px;color:var(--muted-48);
+}
+
+/* 论坛 */
+.forum .composer{display:flex;flex-direction:column;gap:var(--s-sm);margin-bottom:var(--s-lg)}
+.composer input,.composer textarea{
+  font-family:var(--font); font-size:15px; color:#fff;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--hairline); border-radius:var(--r-md);
+  padding:11px 15px; outline:none; width:100%;
+}
+.composer input{border-radius:var(--r-pill);height:40px}
+.composer textarea{resize:none;height:72px;line-height:1.45;letter-spacing:-.2px}
+.composer input::placeholder,.composer textarea::placeholder{color:var(--muted-48)}
+.composer input:focus,.composer textarea:focus{border-color:var(--primary-focus)}
+.composer .row{display:flex;align-items:center;justify-content:space-between}
+.composer .hint{font-size:12px;letter-spacing:-.12px;color:var(--muted-48)}
+.composer .send{
+  background:var(--primary);color:#fff;border:0;border-radius:var(--r-pill);
+  padding:9px 20px;font-family:var(--font);font-size:14px;letter-spacing:-.224px;
+  cursor:pointer;transition:transform .12s;
+}
+.composer .send:active{transform:scale(.95)}
+
+.posts{list-style:none;display:flex;flex-direction:column}
+.post{
+  display:flex;gap:12px;padding:var(--s-md) 0;
+  border-top:1px solid var(--hairline-soft);
+}
+.post:first-child{border-top:0;padding-top:4px}
+.avatar{
+  width:32px;height:32px;flex:none;border-radius:var(--r-pill);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:#fff;letter-spacing:0;
+}
+.post .who{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.post .who strong{font-size:14px;font-weight:600;letter-spacing:-.224px}
+.post .who span{font-size:12px;letter-spacing:-.12px;color:var(--muted-48)}
+.post p{font-size:15px;line-height:1.5;letter-spacing:-.2px;color:var(--body-muted)}
+
+/* 访客记录 */
+.visitors .list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.guest{display:flex;align-items:center;gap:10px;padding:9px 0}
+.guest .avatar{width:28px;height:28px;font-size:12px}
+.guest .name{
+  flex:1;min-width:0;font-size:14px;font-weight:400;letter-spacing:-.224px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.guest .when{font-size:12px;letter-spacing:-.12px;color:var(--muted-48);flex:none}
+.online{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;letter-spacing:-.12px;color:var(--muted-48);
+}
+.online i{
+  width:6px;height:6px;border-radius:50%;background:#30d158;display:inline-block;
+}
+
+/* ---------------------------------------------------------- 页脚 */
+footer{
+  background:var(--tile-3);
+  padding:64px var(--s-xxl) 40px;
+  border-top:1px solid var(--hairline-soft);
+}
+.fcols{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-xl)}
+.fcols h3{
+  font-size:14px;font-weight:600;letter-spacing:-.224px;
+  color:#fff;margin-bottom:var(--s-xs);
+}
+.fcols ul{list-style:none}
+.fcols a{
+  font-size:17px;line-height:2.41;letter-spacing:0;
+  color:var(--muted-80);text-decoration:none;
+}
+.fcols a:hover{color:#fff}
+.legal{
+  margin-top:var(--s-xl);padding-top:var(--s-md);
+  border-top:1px solid var(--hairline-soft);
+  display:flex;justify-content:space-between;gap:var(--s-lg);
+  font-size:12px;line-height:1.3;letter-spacing:-.08px;color:var(--muted-48);
+}
+
+@media (max-width:1080px){
+  .hall{grid-template-columns:1fr;padding:var(--s-xl) var(--s-lg)}
+  .hero{padding:64px var(--s-lg) 48px}
+  .hero h1{font-size:40px}
+  .hero .lead{font-size:24px}
+  .fcols{grid-template-columns:repeat(2,1fr);gap:var(--s-lg)}
+}
+</style>
+</head>
+<body>
+
+<nav class="gnav">
+  <div class="mark"><span>☾</span><b>Severus</b></div>
+  <div class="links">
+    <a href="#">聚落</a><a href="#">相册</a><a href="#">视频</a><a href="#">论坛</a>
+  </div>
+  <div class="right">
+    <a href="#">后台</a>
+    <a href="#" class="pill">登录</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Severus的神秘聚落</h1>
+  <p class="lead">夜里有照片，也有故事。</p>
+  <div class="cta">
+    <a class="btn solid" href="#">进入相册</a>
+    <a class="btn ghost" href="#">来聊聊</a>
+  </div>
+  <p class="stats">24 张照片 · 6 段影像 · 已接待 1,204 位访客</p>
+</header>
+
+<main class="hall">
+
+  <!-- 左栏：相册在上，视频在下 -->
+  <div class="col-left">
+    <article class="card">
+      <h2>相册 <span class="count">24</span></h2>
+      <div class="grid">
+        <div class="ph a"></div><div class="ph b"></div>
+        <div class="ph c"></div><div class="ph d"></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>视频 <span class="count">6</span></h2>
+      <ul class="vlist">
+        <li class="vrow">
+          <div class="poster ph a"></div>
+          <div class="meta"><strong>山谷的雾</strong><span>00:42</span></div>
+        </li>
+        <li class="vrow">
+          <div class="poster ph c"></div>
+          <div class="meta"><strong>夜航</strong><span>01:18</span></div>
+        </li>
+        <li class="vrow">
+          <div class="poster ph b"></div>
+          <div class="meta"><strong>屋顶上的猫</strong><span>02:05</span></div>
+        </li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- 中栏：论坛 -->
+  <article class="card forum">
+    <h2>论坛 <span class="count">无需登录</span></h2>
+    <div class="composer">
+      <input type="text" placeholder="你的昵称">
+      <textarea placeholder="说点什么…"></textarea>
+      <div class="row">
+        <span class="hint">免登录发言 · 内容将在 20 秒内不可重复提交</span>
+        <button class="send">发布</button>
+      </div>
+    </div>
+    <ul class="posts">
+      <li class="post">
+        <div class="avatar" style="background:#3b4a5e">阿</div>
+        <div>
+          <div class="who"><strong>阿獾</strong><span>3 分钟前</span></div>
+          <p>第一次来，这里的夜灯照片真好看，像有人把星星摘下来挂在屋檐下。</p>
+        </div>
+      </li>
+      <li class="post">
+        <div class="avatar" style="background:#5a4a34">栗</div>
+        <div>
+          <div class="who"><strong>栗子</strong><span>12 分钟前</span></div>
+          <p>有没有人周末一起上山看雾？我可以带相机。</p>
+        </div>
+      </li>
+      <li class="post">
+        <div class="avatar" style="background:#33443b">匿</div>
+        <div>
+          <div class="who"><strong>匿名</strong><span>1 小时前</span></div>
+          <p>视频区那段延时拍得不错，想知道用的什么机器。</p>
+        </div>
+      </li>
+      <li class="post">
+        <div class="avatar" style="background:#4a3b52">夜</div>
+        <div>
+          <div class="who"><strong>夜航员</strong><span>昨天 23:40</span></div>
+          <p>聚落的第一条留言。祝这里一直有人来。</p>
+        </div>
+      </li>
+    </ul>
+  </article>
+
+  <!-- 右栏：访客记录 -->
+  <aside class="card visitors">
+    <h2>访客记录</h2>
+    <p class="sub">仅登录用户会被记录</p>
+    <ul class="list">
+      <li class="guest">
+        <div class="avatar" style="background:#3d4d63">S</div>
+        <span class="name">severus</span><span class="when">刚刚</span>
+      </li>
+      <li class="guest">
+        <div class="avatar" style="background:#5b4636">L</div>
+        <span class="name">lin.</span><span class="when">4 分钟前</span>
+      </li>
+      <li class="guest">
+        <div class="avatar" style="background:#37503f">Y</div>
+        <span class="name">yuki</span><span class="when">22 分钟前</span>
+      </li>
+      <li class="guest">
+        <div class="avatar" style="background:#4a3a52">H</div>
+        <span class="name">hao</span><span class="when">1 小时前</span>
+      </li>
+      <li class="guest">
+        <div class="avatar" style="background:#52453a">M</div>
+        <span class="name">mika</span><span class="when">昨天</span>
+      </li>
+    </ul>
+    <p style="margin-top:16px">
+      <span class="online"><i></i>3 人在线</span>
+    </p>
+  </aside>
+
+</main>
+
+<footer>
+  <div class="fcols">
+    <div><h3>聚落</h3><ul><li><a href="#">关于</a></li><li><a href="#">来客须知</a></li></ul></div>
+    <div><h3>相册</h3><ul><li><a href="#">全部照片</a></li><li><a href="#">按时间</a></li></ul></div>
+    <div><h3>视频</h3><ul><li><a href="#">全部影像</a></li><li><a href="#">播放列表</a></li></ul></div>
+    <div><h3>参与</h3><ul><li><a href="#">论坛</a></li><li><a href="#">注册</a></li></ul></div>
+  </div>
+  <div class="legal">
+    <span>Copyright © 2026 Severus的神秘聚落. 保留所有权利。</span>
+    <span>本地部署 · 仅供局域网访问</span>
+  </div>
+</footer>
+
+</body>
+</html>
