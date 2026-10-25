@@ -25,3 +25,5 @@ cloudflared.exe
 # 系统
 Thumbs.db
 desktop.ini
+.shot*/
+screenshots/debug.png
